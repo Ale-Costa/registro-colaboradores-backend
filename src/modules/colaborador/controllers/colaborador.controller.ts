@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { ColaboradorService } from './colaborador.service';
-import { ColaboradorDTO } from 'src/modules/colaborador/colaborador.dto';
+import { ColaboradorDTO } from 'src/modules/colaborador/models/colaborador.dto';
+import { ColaboradorService } from '../services/colaborador.service';
 
 @Controller('colaborador')
 export class ColaboradorController {
@@ -17,7 +17,7 @@ export class ColaboradorController {
   }
 
   @Put('/validar/:id')
-  async validar(@Param('id') id: number): Promise<ColaboradorDTO> {
-    return this.colaboradorService.validar(id);
+  async validar(@Param('id') id: string): Promise<ColaboradorDTO> {
+    return this.colaboradorService.validar(Number(id));
   }
 }

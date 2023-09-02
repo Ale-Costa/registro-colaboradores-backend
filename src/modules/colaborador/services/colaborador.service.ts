@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/primaService';
-import { ColaboradorDTO } from 'src/modules/colaborador/colaborador.dto';
+import { ColaboradorDTO } from 'src/modules/colaborador/models/colaborador.dto';
 
 @Injectable()
 export class ColaboradorService {
@@ -29,6 +30,8 @@ export class ColaboradorService {
   }
 
   async buscarColaboradores(): Promise<ColaboradorDTO[]> {
+    console.log('Buscando colaboradores');
+
     return this.prismaService.colaborador.findMany();
   }
 

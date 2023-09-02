@@ -13,22 +13,22 @@ export class ColaboradorDTO {
   @IsString({ message: 'Nome deve ser uma string' })
   nome: string;
 
-  @IsNotEmpty({ message: 'E-mail não pode ser vazio' })
-  @IsString({ message: 'E-mail deve ser uma string' })
+  @IsNotEmpty({ message: 'email não pode ser vazio' })
+  @IsString({ message: 'email deve ser uma string' })
   email: string;
 
-  @IsNotEmpty({ message: 'CPF não pode ser vazio' })
-  @IsString({ message: 'CPF deve ser uma string' })
+  @IsNotEmpty({ message: 'cpf não pode ser vazio' })
+  @IsString({ message: 'cpf deve ser uma string' })
   cpf: string;
 
   @IsOptional()
-  @IsString({ message: 'Telefone deve ser uma string' })
+  @IsString({ message: 'telefone deve ser uma string' })
   telefone?: string;
 
-  @IsNotEmpty({ message: 'Conhecimentos não pode ser vazio' })
-  @IsArray({ message: 'Conhecimentos deve ser uma lista' })
+  @IsNotEmpty({ message: 'conhecimentos não pode ser vazio' })
+  @IsArray({ message: 'conhecimentos deve ser uma lista' })
   @IsString({
-    message: 'Conhecimentos deve ser uma lista de string',
+    message: 'conhecimentos deve ser uma lista de string',
     each: true,
   })
   conhecimentos: string[];
