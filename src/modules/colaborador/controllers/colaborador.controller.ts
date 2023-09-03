@@ -19,7 +19,7 @@ export class ColaboradorController {
 
   @Get(':id')
   async buscarPorId(@Param('id') id: number): Promise<ColaboradorDTO> {
-    return this.colaboradorService.buscarColaraboradorPorId(Number(id));
+    return this.colaboradorService.buscarColaboradorPorId(Number(id));
   }
 
   @Post('/registrar')

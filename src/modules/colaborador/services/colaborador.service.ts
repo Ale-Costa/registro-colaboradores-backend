@@ -1,7 +1,6 @@
-/* eslint-disable prettier/prettier */
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/primaService';
-import { ColaboradorDTO } from 'src/modules/colaborador/models/colaborador.dto';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../../database/primaService';
+import { ColaboradorDTO } from '../models/colaborador.dto';
 
 @Injectable()
 export class ColaboradorService {
@@ -22,15 +21,13 @@ export class ColaboradorService {
       );
     }
 
-    const colaborador = await this.prismaService.colaborador.create({
+    return await this.prismaService.colaborador.create({
       data,
     });
-
-    return colaborador;
   }
 
   async buscarColaboradores(): Promise<ColaboradorDTO[]> {
-    return this.prismaService.colaborador.findMany({
+    return await this.prismaService.colaborador.findMany({
       orderBy: {
         nome: 'asc',
       },
@@ -38,10 +35,7 @@ export class ColaboradorService {
   }
 
   async buscarColaboradorPorNome(nome: string): Promise<ColaboradorDTO[]> {
-    if (!nome) {
-      return this.buscarColaboradores();
-    }
-    return this.prismaService.colaborador.findMany({
+    return await this.prismaService.colaborador.findMany({
       where: {
         nome: {
           contains: nome,
@@ -54,20 +48,23 @@ export class ColaboradorService {
     });
   }
 
-  async buscarColaraboradorPorId(id: number): Promise<ColaboradorDTO> {
-    return this.prismaService.colaborador.findUnique({
-      where: {
-        id,
-      },
-    });
-  }
+  async buscarColaboradorPorId(id: number): Promise<ColaboradorDTO> {
+    try{
+      return await this.prismaService.colaborador.findUnique({
+        where: {
+          id,
+        },
+      });
+    }catch{
+      throw new NotFoundException();
+  }}
 
   async validar(id: number): Promise<ColaboradorDTO> {
     const colaboradorExiste = await this.prismaService.colaborador.findUnique({
       where: {
         id,
       },
-    });
+    });    
 
     if (!colaboradorExiste) {
       throw new HttpException(
@@ -76,7 +73,7 @@ export class ColaboradorService {
       );
     }
 
-    return this.prismaService.colaborador.update({
+    return await this.prismaService.colaborador.update({
       where: {
         id,
       },
@@ -101,7 +98,7 @@ export class ColaboradorService {
       );
     }
 
-    return this.prismaService.colaborador.update({
+    return await this.prismaService.colaborador.update({
       where: {
         id,
       },
