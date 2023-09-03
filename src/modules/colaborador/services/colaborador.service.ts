@@ -30,9 +30,36 @@ export class ColaboradorService {
   }
 
   async buscarColaboradores(): Promise<ColaboradorDTO[]> {
-    console.log('Buscando colaboradores');
+    return this.prismaService.colaborador.findMany({
+      orderBy: {
+        nome: 'asc',
+      },
+    });
+  }
 
-    return this.prismaService.colaborador.findMany();
+  async buscarColaboradorPorNome(nome: string): Promise<ColaboradorDTO[]> {
+    if (!nome) {
+      return this.buscarColaboradores();
+    }
+    return this.prismaService.colaborador.findMany({
+      where: {
+        nome: {
+          contains: nome,
+          mode: 'insensitive',
+        },
+      },
+      orderBy: {
+        nome: 'asc',
+      },
+    });
+  }
+
+  async buscarColaraboradorPorId(id: number): Promise<ColaboradorDTO> {
+    return this.prismaService.colaborador.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
   async validar(id: number): Promise<ColaboradorDTO> {
@@ -55,6 +82,32 @@ export class ColaboradorService {
       },
       data: {
         validado: true,
+        dataValidacao: new Date(),
+      },
+    });
+  }
+
+  async invalidar(id: number): Promise<ColaboradorDTO> {
+    const colaboradorExiste = await this.prismaService.colaborador.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!colaboradorExiste) {
+      throw new HttpException(
+        'Colaborador não cadastrado',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    return this.prismaService.colaborador.update({
+      where: {
+        id,
+      },
+      data: {
+        validado: false,
+        dataValidacao: new Date(),
       },
     });
   }
