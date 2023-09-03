@@ -19,13 +19,7 @@ npm install
 
 2.Ajuste o arquivo .env com as configurações de conexão com o postgreSQL
 
-3.Instalação global do prisma
-
-```bash
-npm install @prisma/client
-```
-
-4.Aplicação da estrutura de banco de dados
+3.Aplicação da estrutura de banco de dados
 
 ```bash
 npx prisma generate
@@ -38,8 +32,7 @@ npx prisma migrate dev
 npm run start
 ```
 
-
-
+---
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
