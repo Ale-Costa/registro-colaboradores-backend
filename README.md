@@ -1,3 +1,46 @@
+## Tecnologias utilizadas
+
+- Framework NestJs para desevolvimento da api
+- Prisma para facilitar as operações de banco de dados
+- Jest para elaboração de testes unitarios
+
+## Requisitos
+
+- Banco de dados PostgreSQL
+- Necessário ter um database com o nome "rh"
+
+## Instruções para execução da api
+
+1.Instalação das dependencias do projeto
+
+```bash
+npm install
+```
+
+2.Ajuste o arquivo .env com as configurações de conexão com o postgreSQL
+
+3.Instalação global do prisma
+
+```bash
+npm install @prisma/client
+```
+
+4.Aplicação da estrutura de banco de dados
+
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
+
+## Execução da api
+
+```bash
+npm run start
+```
+
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
