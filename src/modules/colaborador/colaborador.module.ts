@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ColaboradorService } from './colaborador.service';
-import { ColaboradorController } from './colaborador.controller';
 import { PrismaService } from '../../database/primaService';
+import { ColaboradorController } from './controllers/colaborador.controller';
+import { ColaboradorService } from './services/colaborador.service';
 
 @Module({
   controllers: [ColaboradorController],

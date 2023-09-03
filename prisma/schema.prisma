@@ -12,8 +12,9 @@ model Colaborador {
   nome String  
   email  String
   cpf String @unique
-  celular Int?
+  celular String?
   conhecimentos String[]
   validado Boolean?
+  dataValidacao DateTime?
 } 
 
